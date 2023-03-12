@@ -14,16 +14,35 @@ class Feedback extends React.Component {
     bad: 0,
   };
 
-  options = ['Good', 'Neutral', 'Bad'];
+  options = {
+    option1: 'Good',
+    option2: 'Neutral',
+    option3: 'Bad',
+  };
 
   showStat = false;
 
-  onLeaveFeedback = event => {
-    const option = event.currentTarget.innerText.toLowerCase();
+  handleGood = () => {
     this.setState(prevState => {
       return {
-        [option]: prevState[option] + 1,
+        good: prevState.good + 1,
       };
+    });
+    this.showStatistics();
+  };
+
+  handleNeutral = () => {
+    this.setState(prevState => {
+      return {
+        neutral: prevState.neutral + 1,
+      };
+    });
+    this.showStatistics();
+  };
+
+  handleBad = () => {
+    this.setState(prevState => {
+      return { bad: prevState.bad + 1 };
     });
     this.showStatistics();
   };
@@ -44,6 +63,12 @@ class Feedback extends React.Component {
   showStatistics() {
     this.showStat = true;
   }
+
+  onLeaveFeedback = {
+    onHandleGood: this.handleGood,
+    onHandleNeutral: this.handleNeutral,
+    onHandleBad: this.handleBad,
+  };
 
   render() {
     return (
