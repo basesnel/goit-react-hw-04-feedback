@@ -7,6 +7,8 @@ import FeedbackOptions from './FeedbackOptions/FeedbackOptions';
 import Notification from './Notification/Notification';
 import Statistics from './Statistics/Statistics';
 
+// class to function
+
 class Feedback extends React.Component {
   state = {
     good: 0,
