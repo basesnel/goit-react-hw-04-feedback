@@ -1,20 +1,17 @@
 // import PropTypes from 'prop-types';
 import { FeedbackSection } from './Feedback.styled';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import Section from './Section/Section';
 import FeedbackOptions from './FeedbackOptions/FeedbackOptions';
 import Notification from './Notification/Notification';
 import Statistics from './Statistics/Statistics';
 
-// class to function
-
-let showStat = false;
-
 export default function Feedback() {
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
+  const showStat = useRef(false);
 
   const options = ['Good', 'Neutral', 'Bad'];
 
@@ -53,7 +50,7 @@ export default function Feedback() {
   }
 
   function showStatistics() {
-    showStat = true;
+    showStat.current = true;
   }
 
   return (
@@ -61,7 +58,7 @@ export default function Feedback() {
       <Section sectionTitle="Please leave feedback">
         <FeedbackOptions options={options} onLeaveFeedback={onLeaveFeedback} />
       </Section>
-      {showStat ? (
+      {showStat.current ? (
         <Section sectionTitle="Statistics">
           <Statistics
             good={good}
